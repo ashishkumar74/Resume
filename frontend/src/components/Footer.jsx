@@ -14,9 +14,9 @@ const Footer = () => {
 
   return (
     <footer className='bg-gray-900 text-white'>
-      <div className='container mx-auto px-4 py-12'>
+      <div className='container mx-auto px-4 py-4'>
         {/* Main Footer Content */}
-        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 mb-8'>
+        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 mb-4'>
           {/* Brand Column */}
           <div className='lg:col-span-2'>
             <h3 className='text-2xl font-bold mb-4'>RESUME BUILDER</h3>
@@ -156,7 +156,7 @@ const Footer = () => {
         </div>
 
         {/* Newsletter Section */}
-        <div className='border-t border-gray-800 pt-8 mb-8'>
+        <div className='border-t border-gray-800 pt-4 mb-4'>
           <div className='max-w-2xl mx-auto text-center'>
             <h4 className='font-bold mb-2 text-lg'>Stay Updated</h4>
             <p className='text-gray-400 mb-4'>
@@ -179,7 +179,7 @@ const Footer = () => {
         </div>
 
         {/* Bottom Bar */}
-        <div className='border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4'>
+        <div className='border-t border-gray-800 pt-4 flex flex-col md:flex-row justify-between items-center gap-4'>
           <p className='text-gray-400 text-sm text-center md:text-left'>
             © {currentYear} Resume Builder. Made with <span className='text-red-500'>❤</span> for job seekers everywhere.
           </p>
