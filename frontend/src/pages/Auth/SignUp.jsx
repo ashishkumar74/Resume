@@ -1,12 +1,12 @@
 import React, { useContext, useState } from 'react'
 import { useNavigate } from "react-router-dom";
-import Input from '../../components/Inputs/Input';
 import { validateEmail, validatePassword, validateFullName } from '../../utils/helper';
-import ProfilePhotoSelector from '../../components/Inputs/ProfilePhotoSelector';
 import axiosInstance from '../../utils/axiosInstance';
 import { API_PATHS } from '../../utils/apiPaths';
 import uploadImage from '../../utils/uploadImage';
 import { UserContext } from '../../context/userContext';
+import { SmokeyBackground } from '../../components/ui/login-form';
+import { SignUpForm } from '../../components/ui/signup-form';
 
 const SignUp = ({ setCurrentPage }) => {
   const [profilePic, setProfilePic] = useState('');
@@ -77,77 +77,23 @@ const SignUp = ({ setCurrentPage }) => {
   };
 
   return (
-    <div className='w-[90vw] max-h-[96vh] md:w-[450px] p-8 flex flex-col justify-center bg-white rounded-xl shadow-lg overflow-y-auto custom-scrollbar'>
-      <div className='mb-6'>
-        <h3 className='text-2xl font-bold text-gray-900 mb-2'>Create Account</h3>
-        <p className='text-sm text-gray-600'>Join us and start building professional resumes</p>
+    <div className="relative w-[90vw] md:w-[650px] h-[600px] rounded-2xl overflow-hidden shadow-2xl bg-white/10 backdrop-blur-lg border border-white/20">
+      {/* <SmokeyBackground className="absolute inset-0" color="#ffffff" /> */}
+      <div className="relative z-10 flex items-center justify-center w-full h-full p-4">
+        <SignUpForm 
+          onSubmit={handleSignUp}
+          fullName={fullName}
+          setFullName={setFullName}
+          email={email}
+          setEmail={setEmail}
+          password={password}
+          setPassword={setPassword}
+          error={error}
+          isLoading={isLoading}
+          onLoginClick={() => setCurrentPage("login")}
+        />
       </div>
-
-      <form onSubmit={handleSignUp} className='space-y-4'>
-
-        <ProfilePhotoSelector photo={profilePic} onChange={setProfilePic} />
-
-        <div className='grid grid-cols-1 md:grid-cols-1 gap-2'>
-          <Input
-            value={fullName}
-            onChange={({ target }) => setFullName(target.value)}
-            label='Full Name'
-            type='text'
-            placeholder='Full Name'
-            required
-          />
-          <Input
-            value={email}
-            onChange={({ target }) => setEmail(target.value)}
-            label='Email Address'
-            type='email'
-            placeholder='Email'
-            required
-          />
-          <Input
-            value={password}
-            onChange={({ target }) => setPassword(target.value)}
-            label='Password'
-            type='password'
-            placeholder='Min 8 characters'
-            required
-          />
-        </div>
-        {error && (
-          <div className='bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm'>
-            {error}
-          </div>
-        )}
-
-        <button 
-          type='submit' 
-          className='btn-primary w-full disabled:opacity-50 disabled:cursor-not-allowed' 
-          disabled={isLoading}
-        >
-          {isLoading ? (
-            <span className='flex items-center justify-center gap-2'>
-              <svg className='animate-spin h-5 w-5' viewBox='0 0 24 24'>
-                <circle className='opacity-25' cx='12' cy='12' r='10' stroke='currentColor' strokeWidth='4' fill='none' />
-                <path className='opacity-75' fill='currentColor' d='M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z' />
-              </svg>
-              Creating Account...
-            </span>
-          ) : 'Sign Up'}
-        </button>
-        <p className='text-sm text-gray-600 text-center mt-6'>
-          Already have an account?{' '}
-          <button
-            type='button'
-            className='font-semibold text-purple-600 hover:text-purple-700 cursor-pointer no-underline transition'
-            onClick={() => {
-              setCurrentPage("login");
-            }}
-          >
-            Login
-          </button>
-        </p>
-      </form>
-    </div >
+    </div>
   )
 }
 
